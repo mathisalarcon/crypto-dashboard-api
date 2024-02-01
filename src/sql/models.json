@@ -1,0 +1,32 @@
+{
+    "users": {
+        "_id": "INT PRIMARY KEY AUTO_INCREMENT",
+        "firstname": "VARCHAR(255) NOT NULL",
+        "lastname": "VARCHAR(255) NOT NULL",
+        "email": "VARCHAR(255) UNIQUE NOT NULL",
+        "password": "VARCHAR(255) NOT NULL",
+        "pincode": "INT NOT NULL",
+        "created_at": "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP"
+    },
+    "wallets": {
+        "_id": "VARCHAR(255) PRIMARY KEY",
+        "user_id": "INT NOT NULL",
+        "__add": "FOREIGN KEY (user_id) REFERENCES users(_id)"
+    }, 
+    "transactions": {
+        "_id": "INT PRIMARY KEY AUTO_INCREMENT",
+        "type": "INT NOT NULL",
+        "from_currency_symbol": "VARCHAR(255) NOT NULL",
+        "from_currency_value": "INT NOT NULL",
+        "from_currency_amount": "INT NOT NULL",
+        "sender_wallet_id": "VARCHAR(255) NOT NULL",
+        "to_currency_symbol": "VARCHAR(255) NOT NULL",
+        "to_currency_value": "INT NOT NULL",
+        "to_currency_amount": "INT NOT NULL",
+        "recipient_wallet_id": "VARCHAR(255) NOT NULL",
+        "transmitted_at": "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP",
+        "status": "INT NOT NULL DEFAULT 0",
+        "executed_at": "DATETIME DEFAULT NULL",
+        "__add": "FOREIGN KEY (sender_wallet_id) REFERENCES wallets(_id), FOREIGN KEY (recipient_wallet_id) REFERENCES wallets(_id)"
+    }
+}   
